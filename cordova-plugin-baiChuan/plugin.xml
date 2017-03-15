@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<plugin id="cordova-plugin-alibaichuan" verstion="0.0.1">
+<plugin id="cordova-plugin-alibaichuan" verstion="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>AliBaiChuan</name>
     <description>AliBaiChuan Plugin</description>
+    <author>iflamed@gmail.com</author>
+    <license>MIT</license>
+    <keywords>cordova,alibaba,baichuan,taobake</keywords>
 
-    <!--ios部分-->
+    <preference name="APPKEY" />
+    <!--
     <platform name="ios">
-	 <!--js-->
-    <js-module src="www/baiChuan.js">
-        <clobbers target="AliBaiChuan" />
-    </js-module>
+        <js-module src="www/baiChuan.js">
+            <clobbers target="AliBaiChuan" />
+        </js-module>
         <config-file target="config.xml" parent="/*">
             <feature name="CDVBaiChuan">
                 <param name="ios-package" value="CDVBaiChuan" />
@@ -37,27 +40,28 @@
         <framework src="src/ios/libs/ALBBAppLink.framework" custom="true" embed="true" />
         <source-file src="src/ios/CDVBaiChuan.h"/>
         <source-file src="src/ios/CDVBaiChuan.m"/>
-    </platform>
-	
-   <platform name="android">
-    <js-module src="www/baiChuan.js">
-        <clobbers target="AliBaiChuan"/>
-    </js-module>
-	 <config-file parent="/*" target="res/xml/config.xml">
+    </platform> -->
+
+    <platform name="android">
+        <js-module src="www/baiChuan.js">
+            <clobbers target="AliBaiChuan"/>
+        </js-module>
+        <config-file parent="/*" target="res/xml/config.xml">
             <feature name="CDVBaiChuan">
                 <param name="android-package" value="com.android.AliBaiChuan"/>
             </feature>
         </config-file>
         <source-file src="src/android/AliBaiChuan.java" target-dir="src/android/" />
-		 <source-file src="src/android/libs/BaichuanApplinkSDK.jar" target-dir="libs"/>
-		  <source-file src="src/android/libs/BaichuanMiniKernel.jar" target-dir="libs"/>
-       
+        <source-file src="src/android/libs/BaichuanApplinkSDK.jar" target-dir="libs"/>
+        <source-file src="src/android/libs/BaichuanMiniKernel.jar" target-dir="libs"/>
+
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-			 <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
         </config-file>
-		
-	
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <meta-data android:name="com.alibaba.app.appkey" android:value="$APPKEY"/>
+        </config-file>
     </platform>
 </plugin>
